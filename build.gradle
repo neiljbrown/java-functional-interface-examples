@@ -65,6 +65,13 @@ idea {
   project {
     jdkName = '11'
     languageLevel = '11'
+    // Force IDEA project to use required bytecode version for access to Java language features.
+    targetBytecodeVersion = 'VERSION_11' 
+  }
+  module {
+    // Force IDEA module to use required bytecode version for access to Java language features. Contrary to Gradle
+    // manual docs for idea task, IJ does not inherit this value from the project
+    targetBytecodeVersion = 'VERSION_11' 
   }
 }
 
