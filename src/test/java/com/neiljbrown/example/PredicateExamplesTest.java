@@ -1,7 +1,6 @@
 package com.neiljbrown.example;
 
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,6 +29,7 @@ public class PredicateExamplesTest {
   @Test
   public void testFilterList()  {
     List<String> filteredRacers = Stream.of("Lando", "Daniel", "Lewis")
+      // Use a Predicate implemented using a Lambda expression to filter the stream
       .filter(racer -> racer.startsWith("L"))
       .collect(Collectors.toList());
 
