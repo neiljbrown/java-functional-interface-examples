@@ -12,13 +12,17 @@ import org.junit.jupiter.api.Test;
 /**
  * Class containing examples of using Java's simplest class of Java functional interface - {@link Function}.
  * <p>
- * The simplest class of Java functional interface is one containing a method that receives a _single_ value _and_
- * returns another. This function of a single argument is represented by the Java core library's
+ * One of the simplest classes of Java functional interface is one containing a method that receives a _single_ value
+ * _and_ returns another. This function of a single argument is represented by the Java core library's
  * {@link java.util.function.Function} interface, which is parameterized by the types of its argument (T) and a
  * return value (R).
+ * <p>
+ * A {@link Function} actually combines the capabilities of the two simpler Java functional interfaces
+ * {@link java.util.function.Consumer} and {@link java.util.function.Supplier}.
  *
  * <h2>References</h2>
  *
+ * @see SupplierExamplesTest
  */
 public class FunctionExamplesTest {
 

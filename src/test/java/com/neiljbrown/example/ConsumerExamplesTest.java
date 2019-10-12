@@ -39,7 +39,7 @@ public class ConsumerExamplesTest {
    */
   @Test
   public void testConsumeMap()  {
-    Map<String, String> racerTeams = Map.of("Lando", "McClaren", "Daniel", "Renault", "Lewis", "Mercedes");
+    Map<String, String> racerTeams = Map.of("Lando", "McLaren", "Daniel", "Renault", "Lewis", "Mercedes");
     racerTeams.forEach((racer, team) -> System.out.println(racer + " races for team " + team + "."));
   }
 }
