@@ -8,10 +8,11 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class containing examples of using Java's {@link Consumer} interface.
+ * Class containing examples of using Java's {@link Consumer} interfaces which represents an operation on one
+ * operand that does _not_ produce a result.
  * <p>
  * The {@link Consumer} functional interface defines a type of function that accepts a single input (argument) but
- * returns no  value. As such it is expected to result in a side effect(s). Similarly to
+ * returns no value. As such it is expected to result in a side effect(s). Similarly to
  * {@link java.util.function.Function} there are specialised versions of the Consumer functional interface that support
  * accepting primitive arguments, such as IntConsumer, LongConsumer and DoubleConsumer.
  * <p>
@@ -24,8 +25,8 @@ import org.junit.jupiter.api.Test;
 public class ConsumerExamplesTest {
 
   /**
-   * Provides an example of using a {@link Consumer} to process a list of elements,
-   * using {@link List#forEach(Consumer)}, in this case printing them to the console.
+   * Provides an example of using a {@link Consumer} to process a list of elements, using
+   * {@link List#forEach(Consumer)}, in this case printing them to the console.
    */
   @Test
   public void testConsumeList()  {

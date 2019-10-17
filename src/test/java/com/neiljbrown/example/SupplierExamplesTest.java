@@ -11,11 +11,12 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class containing examples of using Java's {@link Supplier} interface.
+ * Class containing examples of using Java's {@link Supplier} interface which represents an operation with zero
+ * operands/args that returns a result.
  * <p>
  * The {@link Supplier} functional interface defines a type of Function that supplies (returns) a value without
- * requiring any inputs (arguments). It provides a level of indirection that is typically used to defer the (lazy)
- * generation or retrieval of value until it is definitely needed, at the time it is needed.
+ * requiring any arguments. It provides a level of indirection that is typically used to defer the (lazy)
+ * generation or retrieval of a value until it is definitely needed, at the time it is needed.
  * <p>
  * Similarly to {@link java.util.function.Function} and {@link java.util.function.BiFunction} there are
  * specializations of Supplier functional interface to support primitive return types, such as  BooleanSupplier,
@@ -33,7 +34,7 @@ public class SupplierExamplesTest {
   @Test
   public void testDeferRetrievalOfOptionalValue()  {
     // Simulate a scenario in which an instance of some fictional reference data is supplied as a method argument of
-    // type Optional because it may not be null depending on whether it's been previously retrieved from the database
+    // type Optional because it might be null depending on whether it's been previously retrieved from the database
     Map<String,Object> settings = Math.random() > 0.5 ? null : Collections.emptyMap();
     Optional<Map<String,Object>> optionalSettings = Optional.ofNullable(settings);
     FakeSettingsDao settingsDao = new FakeSettingsDao();
@@ -41,13 +42,14 @@ public class SupplierExamplesTest {
     // The JDK's Optional class provides an orElseGet(Supplier) method for use when the value of the Optional is
     // not present (null), which allows the generation or retrieval of the alternative value to be deferred, e.g.
     settings = optionalSettings.orElseGet(
-      // A Supplier implemented using a lambda expression, could be replaced with method ref settingsDao::querySettings
+      // A Supplier implemented using a lambda expression; could be replaced with method ref settingsDao::querySettings
       () -> settingsDao.querySettings()
     );
 
     assertThat(settings).isNotNull();
 
-    // Contrast the above to the non-lazy equivalent Optional<T>.orElse(T) method, which retrieves the value immediately
+    // Contrast the above to the non-lazy equivalent Optional<T>.orElse(T) method which doesn't use a Supplier but
+    // instead requires the value immediately
     optionalSettings.orElse(settingsDao.querySettings());
   }
 
@@ -83,36 +85,39 @@ public class SupplierExamplesTest {
     // Declare an implementation and instance of Supplier using a method reference
     Supplier<LocalDateTime> currentTimeSupplier = LocalDateTime::now;
 
-    LocalDateTime now = LocalDateTime.now();
+    LocalDateTime now = LocalDateTime.now(); // Current time after declaring but before invoking Supplier
     LocalDateTime localDateTime = currentTimeSupplier.get();
-    Thread.sleep(1);
-    LocalDateTime localDateTimeAgain = currentTimeSupplier.get();
 
+    // Proof that Supplier returns value  on invocation rather than declaration
     assertThat(localDateTime).isAfter(now);
-    assertThat(localDateTimeAgain).isAfter(localDateTime);
   }
 
   /**
-   * Provides an example of using a {@link Supplier} to encode the logic for generating a sequence of values, in this
-   * case a Fibonacci sequence of numbers (each number is the sum of the two preceding ones, starting from 0 and 1).
+   * Provides an example of using a {@link Supplier} as an argument to the Stream API's
+   * {@link Stream#generate(Supplier)} method to provide the operation (encapsulate the logic) for generating a sequence
+   * of values. In this example the Supplier is used to generate a Fibonacci sequence of numbers (each number is the sum
+   * of the two preceding ones, starting from 0 and 1).
    * <p>
-   * Note that to be useful as a generator, a Supplier implemented as a Lambda expression usually needs some sort of
-   * external state.  In this case, its state is comprised of the two last generated numbers in the sequence.
+   * Note that to be useful as a generator, a Supplier implemented as a lambda expression usually needs some sort of
+   * external state. In this case, its state is comprised of the two last generated numbers in the sequence.
    */
   @Test
   public void testFibonacciSequenceGenerator() {
     // External state used by Supplier. Last two numbers in generated sequence. Stored as an array rather than discrete
-    // longs to satisfy constraint that all external variables used inside the lambda have to be effectively final
-    long[] fibs = {0L, 1L};
+    // longs to satisfy constraint that all external variables used inside a lambda have to be effectively final
+    long[] fibLastTwoValues = {0L, 1L};
 
     Stream<Long> fibonacci = Stream.generate(
-      // Supplier function implemented as Lambda expression which generates Fibonacci sequence - the implemented SAM
+      // Supplier function implemented as lambda expression which generates Fibonacci sequence - the implemented SAM
       // accepts no inputs but the function itself relies on external state
       () -> {
-        long result = fibs[1];
-        long fib3 = fibs[0] + fibs[1];
-        fibs[0] = fibs[1];
-        fibs[1] = fib3;
+        //System.out.print("Previous two values "  + fibLastTwoValues[0] + ", " + fibLastTwoValues[1] + "; ");
+        long result = fibLastTwoValues[1];
+        long fib3 = fibLastTwoValues[0] + fibLastTwoValues[1];
+        fibLastTwoValues[0] = fibLastTwoValues[1];
+        fibLastTwoValues[1] = fib3;
+        //System.out.print("Result "  + result + "; ");
+        //System.out.println("Updated last two values "  + fibLastTwoValues[0] + ", " + fibLastTwoValues[1]);
         return result;
       }
     ).limit(50);

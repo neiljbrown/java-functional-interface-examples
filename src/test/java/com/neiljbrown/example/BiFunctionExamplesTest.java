@@ -11,7 +11,8 @@ import java.util.function.BiFunction;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class containing example usage of Java's {@link java.util.function.BiFunction} interface.
+ * Class containing example usage of Java's {@link java.util.function.BiFunction} interface which represents an
+ * operation on _two_ operands that produces a result.
  * <p>
  * As described in {@link FunctionExamplesTest}, a {@link java.util.function.Function} type only accepts one argument
  * (and returns a value)]. To support functions with 2 arguments, Java defines a separate, additional interface with
@@ -33,12 +34,12 @@ public class BiFunctionExamplesTest {
    */
   @Test
   public void testBiFunction() {
-    Map<String, BigDecimal> salaries = new HashMap<>( // Create an immutable Map from the following immutable Map -
-      Map.of(
+    Map<String, BigDecimal> existingSalaries = Map.of(
       "Lewis", new BigDecimal("50000.00"),
       "Dan", new BigDecimal("45000.00"),
       "Lando", new BigDecimal("30000.00")
-    ));
+    );
+    Map<String, BigDecimal> salaries = new HashMap<>(existingSalaries); // Create a mutable Map of salaries
 
     // Use a lambda expression to declare an implementation of a BiFunction - which gives Lando a 10% raise :)
     BiFunction<String, BigDecimal, BigDecimal> salaryAdjuster  = (name, salary) ->
@@ -50,8 +51,8 @@ public class BiFunctionExamplesTest {
     salaries.replaceAll(salaryAdjuster);
 
     assertThat(salaries).containsOnly(
-      entry("Lewis",salaries.get("Lewis")),
-      entry("Dan",salaries.get("Dan")),
+      entry("Lewis",existingSalaries.get("Lewis")),
+      entry("Dan",existingSalaries.get("Dan")),
       entry("Lando", new BigDecimal("33000.00"))
     );
   }

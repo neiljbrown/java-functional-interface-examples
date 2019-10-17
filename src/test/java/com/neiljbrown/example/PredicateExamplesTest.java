@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class containing examples of using Java's {@link Predicate} interface.
+ * Class containing examples of using Java's {@link Predicate} interface which represents an operation on a single
+ * operand/argument that returns a boolean result.
  * <p>
- * The {@link Predicate} functional interface is  a specialisaton of the {@link java.util.function.Function} that
- * receives a single generified value and returns a boolean value.
+ * The {@link Predicate} functional interface is  a specialisaton of the {@link java.util.function.Function}
+ * interface that receives a single generified value and always  returns a boolean value.
  * <p>
  * Similarly to {@link java.util.function.Function} there are specialised versions of the Predicate functional
  * interface that support accepting primitive arguments, such as IntPredicate, LongPredicate and DoublePredicate.
@@ -23,7 +24,7 @@ import org.junit.jupiter.api.Test;
 public class PredicateExamplesTest {
 
   /**
-   * Provides an example of the one of the most common usages of a {@link Predicate} - to filter a collection using
+   * Provides an example of the one of the most common usages of a {@link Predicate} - filtering a collection using
    * the Stream API.
    */
   @Test
