@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Class containing examples of using the specialised subset of Java built-in {@link FunctionalInterface} interfaces
- * that represent an operation hat accepts a single argument and returns a computed value, which can be applied to, or
+ * that represent an operation that accepts a single argument and returns a computed value, which can be applied to, or
  * return _primitive_ data-types (int, long, double).
  * <p>
  * These dedicated specialised Function interfaces need to exist (in addition to and separate from the generic
