@@ -1,0 +1,98 @@
+= Java Functional Interfaces
+:sectlinks:
+:sectnums:
+:sectnumlevels: 4
+:toclevels: 4
+
+== Purpose
+This project provides a set of Java code examples illustrating the set of functional interfaces that were added to
+the JDK's java.util.function package in Java 8+, their general use cases and usage in the standard JDK library (Stream
+ and Collection APIs).
+
+The examples are implemented as a set of easy to run tests, using JUnit (5), in a Gradle (or Maven) project.
+
+== Source Code
+The source code for the examples can be found in the src/test/java folder.
+
+The following list summarises the class names of each of the examples and which functional interface they cover, and
+provides a suggested logical reading order for learning about  them -
+
+. FunctionExamplesTest - Examples of using the simplest class of functional interface - java.util.function.Function,
+which represents an operation on a _single_ operand that produces a result.
+
+. PrimitiveFunctionSpecialisationExamplesTest - Examples of using using the specialised subset of functional interfaces
+that represent an operation that accepts a single argument and returns a computed value, which can be applied to, or
+return _primitive_ data-types (int, long, double).
+
+. BiFunctionExamplesTest - Examples of using the java.util.function.BiFunction interface, which represents an
+operation on _two_ operands that produces a result.
+
+. SupplierExamplesTest - Examples of using the java.util.function.Supplier interface, which represents an operation
+with zero operands/args that returns a result.
+
+. ConsumerExamplesTest - Examples of using the java.util.function.Consumer and BiConsumer interfaces, which represent
+ an operation on one operand, or two operands, respectively, that do _not_ produce a result.
+
+. PredicateExamplesTest - Examples of using the java.util.function.Predicate interface, which represents an operation
+on a single operand/argument that returns a boolean result.
+
+. OperatorExamplesTest - Examples of using the java.util.function.UnaryOperator and java.util.function.BinaryOperator
+ interfaces which are specialisations of a function that both receive and return the same type/class of value.
+
+An explanation of these functional interfaces, along with guidance on their usage, can be found in the
+Javadoc of each of the code examples. (See the commands for generating Javadoc below).
+
+== Generating IDE Projects
+If you'd like to view the source in an IDE, the project's Gradle build script supports generating IDE project files
+for both Eclipse and IntelliJ IDEA.
+
+To generate an Eclipse project use the following command:
+
+`./gradlew cleanEclipse eclipse`
+
+To generate an IntelliJ IDEA project use the following command:
+
+`./gradlew cleanIdea idea`
+
+== Building and Running the Examples
+You will need to install a Java 11 JDK.
+
+Support is provided for building and running the project using either Gradle or Maven as described in the sections
+below.
+
+=== Gradle
+The minimum required version of Gradle will be installed if you execute the build using the supplied Gradle wrapper
+script (./gradlew).
+
+To compile and run all the example tests, enter the  following command in the project's root folder:
+
+`./gradlew clean test`
+
+To generate the Javadoc, use the following command:
+
+`./gradlew clean javadocTests`
+
+The generated Javadoc can be found in the standard location for a Gradle project - build/docs/javadoc/index.html.
+
+For more details of Gradle build support see build.gradle in the project's root folder.
+
+=== Maven
+The minimum required version of Maven will be installed if you execute the build using the supplied Maven wrapper
+script (./mvnw).
+
+To compile and run all the example tests, enter the following command in the project's root folder:
+
+`./mvnw clean test`
+
+To generate the Javadoc, use the following command:
+
+`./mvnw javadoc:test-javadoc`
+
+The generated Javadoc can be found in the standard location for a Maven project - target/site/testapidocs/index.html.
+
+For more details of Maven build support see pom.xml in the project's root folder.
+
+
+End
+
+---
